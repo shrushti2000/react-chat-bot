@@ -1,6 +1,7 @@
 'use strict'
 const dialogflow=require('dialogflow');
 const structjson=require('./structjson')
+
 const config=require('../config/keys');
 const projectId = config.googleProjectID;
 const credentials={
@@ -43,6 +44,7 @@ module.exports={
               event: {
                 name:event,
                 parameters:structjson.jsonToStructProto(parameters),
+                //parameters: struct.encode(parameters),
                 languageCode:config.dialogFlowSessionLanguageCode,
                 
             },
