@@ -20,9 +20,9 @@ module.exports={
         queryInput: {
           text: {
             // The query to send to the dialogflow agent
-            text: 'req.body.text',
+            text: req.body.text,
             // The language used by the client (en-US)
-            languageCode: 'config.dialogFlowSessionLanguageCode',
+            languageCode: config.dialogFlowSessionLanguageCode,
           },
         },
         queryParams:{
