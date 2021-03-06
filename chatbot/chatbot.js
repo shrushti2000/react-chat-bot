@@ -30,10 +30,10 @@ module.exports={
                 data:parameters
             }
         }
-    },
-    const responses = await sessionClient.detectIntent(request);
+    };
+    let responses = await sessionClient.detectIntent(request);
     responses=await self.handleAction(responses) 
-    return responses
+    return responses;
 },
 
     eventQuery:async function(event,parameters={}){
@@ -48,13 +48,11 @@ module.exports={
                 languageCode:config.dialogFlowSessionLanguageCode,
                 
             },
-            },
-            queryParams:{
-                payload:{
-                    data:parameters
-                }
             }
-        }
+        };
+        let responses = await sessionClient.detectIntent(request);
+        responses=await self.handleAction(responses) 
+        return responses;
    
 },
 handleActions:function(responses){
