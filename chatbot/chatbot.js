@@ -3,7 +3,7 @@ const dialogflow=require('dialogflow');
 const structjson=require('./structjson')
 
 const config=require('../config/keys');
-const projectId = config.googleProjectID;
+const projectID = config.googleProjectID;
 const credentials={
     client_email:config.googleClientEmail,
     private_key:config.googlePrivateKey
@@ -20,7 +20,7 @@ module.exports={
         queryInput: {
           text: {
             // The query to send to the dialogflow agent
-            text: req.body.text,
+            text: text,
             // The language used by the client (en-US)
             languageCode: config.dialogFlowSessionLanguageCode,
           },
