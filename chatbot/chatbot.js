@@ -15,6 +15,7 @@ const sessionPath=sessionClient.sessionPath(config.googleProjectID,config.dialog
 
 module.exports={
     textQuery:async function(text,parameters={}){
+    let self=module.exports;
     const request = {
         session: sessionPath,
         queryInput: {
