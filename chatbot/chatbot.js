@@ -56,7 +56,7 @@ module.exports={
         return responses;
    
 },
-handleActions:function(responses){
+handleAction:function(responses){
     return responses;
 }
     
