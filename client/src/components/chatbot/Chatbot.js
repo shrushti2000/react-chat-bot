@@ -98,14 +98,25 @@ class Chatbot extends Component{
     }
     render(){
         return(
-            <div style={{height:400,width:400,float:'right'}}>
+            <div style={{height:400,width:400,position:'absolute',bottom:0,right:0, float:'right', border:"1px solid red"}}>
+            <nav>
+                <div className="nav-wrapper">
+                    <a className="brand-logo">ChatBot</a>
+                </div>
+            </nav>
             <div id="chatbot" style={{height:'100%',width:'100%' ,overflow:'auto'}}>
                 <h2>Chatbot</h2>
                 {this.renderMessages(this.state.messages)}
               <div ref={(el)=>{this.messagesEnd = el;}} style={{float:'left',clear:"both"}}></div>
-                <input type="text" onKeyPress={this._handleInputKeyPress}/>
+             </div>
+              <div className="col s2">
+                <input style={{margin:0,paddingLeft:'1%' ,paddingRight:'1%' ,width:'98%'}} type="text" placeholder="type a message" onKeyPress={this._handleInputKeyPress}/>
             </div>
-            </div>
+           </div>
+          
+           
+            
+           
         )
     }
     
