@@ -4,6 +4,7 @@ import axios from 'axios/index';
 import Cookies from 'universal-cookie';
 import {v4 as uuid} from 'uuid';
 import Card from './Card';
+import QuickReplies from './QuickReplies';
 const cookies=new Cookies();
 class Chatbot extends Component{
     messagesEnd;
@@ -11,6 +12,7 @@ class Chatbot extends Component{
        
         super(props);
         this._handleInputKeyPress=this._handleInputKeyPress.bind(this);
+       this._handleQuickReplyPayload=this._handleQuickReplyPayload.bind(this);
         this.state={
             messages:[]
         }
@@ -56,6 +58,12 @@ class Chatbot extends Component{
         this.messagesEnd.scrollIntoView({behaviour:"smooth"})
         //this.talkInput.focus();
     }
+    _handleQuickReplyPayload(event,payload,text){
+        event.preventDefault();
+        event.stopPropogation()
+        this.df_text_query(text);
+    }
+
     renderCards(cards){
         return cards.map((card,i)=><Card key={i} payload={card.structValue}/>)
     }
@@ -79,6 +87,19 @@ class Chatbot extends Component{
                     </div>
                 </div>
             </div>
+        }else if(
+            message.msg && 
+            message.msg.payload &&
+            message.msg.payload.fields &&
+            message.msg.payload.fields.quick_replies
+        ){
+            return <QuickReplies 
+            text={message.msg.payload.fields.text ? message.msg.payload.fields.text:null}
+            key={i}
+            replyClick={this._handleQuickReplyPayload}
+            speaks={message.speaks}
+            payload={message.msg.payload.fields.quick_replies.listValue.values}
+            ></QuickReplies>
         }
     }
     renderMessages(stateMessages){
@@ -113,11 +134,7 @@ class Chatbot extends Component{
                 <input style={{margin:0,paddingLeft:'1%' ,paddingRight:'1%' ,width:'98%'}} type="text" placeholder="type a message" onKeyPress={this._handleInputKeyPress}/>
             </div>
            </div>
-          
-           
-            
-           
-        )
+           )
     }
     
 }
